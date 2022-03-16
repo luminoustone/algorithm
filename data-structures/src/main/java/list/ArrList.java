@@ -13,7 +13,7 @@ public class ArrList<E> {
     }
 
     public E peek(int k) {  // k번째 항목을 리턴, 단순히 읽기만 한다.
-        if (size == 0) {
+        if (isEmpty()) {
             throw new NoSuchElementException(); // underflow 경우에 프로그램 정지
         }
         return a[k];
@@ -43,5 +43,24 @@ public class ArrList<E> {
             t[i] = a[i];                    // 배열 s를 배열 t로 복사
         }
         a = (E[]) t;                        // 배열 t를 배열 s로
+    }
+
+    public E delete(int k) {
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        E item = a[k];
+        for (int i = k; i < size; i++) {    // 한 칸씩 앞으로 이동
+            a[i] = a[i + 1];
+        }
+        size--;
+        if (size > 0 && size == a.length / 4) {     // 배열에 항목들이 1/4만 차지한다면
+            resize(a.length / 2);           // 배열을 1/2 크기로 축소
+        }
+        return item;
+    }
+
+    private boolean isEmpty() {
+        return size == 0 ;
     }
 }
