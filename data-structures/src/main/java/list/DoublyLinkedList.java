@@ -30,7 +30,7 @@ public class DoublyLinkedList <E>{
     }
 
     public void delete(DNode x) {
-        if (x ==) {
+        if (x == null) {
             throw new NoSuchElementException();
         }
         DNode f = x.getPrevious();
